@@ -5,12 +5,16 @@ import http from '../../util/http'
 const SubMenu = Menu.SubMenu
 const MenuItem = Menu.Item
 const MyIcon = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_977200_ggwbeu0be67.js',
+    scriptUrl: '//at.alicdn.com/t/font_977200_735nod3nz0s.js',
 });
 
 class SiderComponent extends React.Component{
-    state = {
-        menuList: {}
+    constructor (props) {
+        super(props)
+        this.state = {
+            menuList: {},
+            tabsArray:[0]
+        }
     }
     componentDidMount(){
         http.post("/manage/backUser/checkLogin",{userPhone:15855496761})
@@ -19,64 +23,30 @@ class SiderComponent extends React.Component{
                 menuList:res.body.roleList
             })
         })
-
     }
-    // getMenu () {
-    //     var SubMenuNodes = []
-    //     if (this.state.menuList.length) {
-    //         SubMenuNodes = this.state.menuList.map((item, key) => {
-    //             if (item.children) {
-    //                 let itemNoades = item.children && item.children.map((child, i) => {
-    //                     if (!child.children) {
-    //                         return (<MenuItem key={child.menuId} tabId={child.menuId}>{child.title}</MenuItem>)
-    //                     }
-    //                     else {
-    //                         var childChild = child.children;
-    //                         let childrenNodes = childChild.map((son, j) => {
-    //                             return (<MenuItem key={son.menuId} tabId={son.menuId}>{son.title}</MenuItem>)
-    //                         });
-    //                         return (<SubMenu key={child.menuId}
-    //                                          title={<span><i></i><span
-    //                                              className="menu-text">{child.title}</span></span>}>
-    //                             {childrenNodes}
-    //                         </SubMenu>);
-    //                     }
-    //                 });
-    //                 return (
-    //                     <SubMenu key={item.menuId}
-    //                              title={<span><i></i><span className="menu-text">{item.title}</span></span>}>
-    //                         {itemNoades}
-    //                     </SubMenu>);
-    //             }
-    //             else {
-    //                 return (
-    //                     <SubMenu key={item.menuId}
-    //                              title={<span><i></i><span className="menu-text">{item.title}</span></span>}>
-    //                     </SubMenu>);
-    //             }
-    //         })
-    //     }
-    //     return SubMenuNodes
-    // }
+
     getMenu () {
         var SubMenuNodes = []
         if (this.state.menuList.length) {
-            SubMenuNodes = this.state.menuList.map((item, key) => {
+            SubMenuNodes = this.state.menuList.map((item) => {
                 if(item.children.length){
-                    return (<SubMenu key={item.menuId} title={<span><i></i><span className="menu-text">{item.title}</span></span>}>
+                    return (<SubMenu key={item.menuId} title={<span>  <MyIcon  type="icon-yuandianzhong"/><span className="menu-text">{item.title}</span></span>}>
                         {
-                            ( item.children.map((sun, i) => {
+                            ( item.children.map((sun) => {
                                 return (<MenuItem key={sun.menuId} >{sun.title}</MenuItem>)
                             }))
 
                         }
                     </SubMenu>)
                 } else {
-                    return (<MenuItem key={item.menuId} >{item.title}</MenuItem>)
+                    return (<MenuItem key={item.menuId} ><MyIcon  type="icon-yuandianzhong"/>{item.title}</MenuItem>)
                 }
             })
         }
         return SubMenuNodes
+    }
+    handleClick(e){
+        console.log(this.props)
     }
     render() {
         const siderMenu = this.getMenu();
@@ -86,9 +56,7 @@ class SiderComponent extends React.Component{
                 <p>现金贷</p>
                 <Menu theme="dark"
                       onClick={this.handleClick}
-                      style={{ width: 256 }}
-                      defaultOpenKeys={['sub1']}
-                      selectedKeys={[this.state.current]}
+                      style={{ textAlign: "left" }}
                       mode="inline">
                 {siderMenu}
                 </Menu>
