@@ -1,73 +1,52 @@
 import React from 'react'
 import http from '../../../util/http'
 import './index.less'
-import {Select, Form} from 'antd'
-const Option = Select.Option,FormItem = Form.Item
-const provinceData = ['Zhejiang', 'Jiangsu'];
-const cityData = {
-    Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
-    Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang'],
-};
+import FillProduct from './fillProduct'
+import Fillspecification  from './fillSpecification'
+import {Button} from 'antd'
 class addCommodity extends React.Component{
     constructor (props) {
         super(props)
         this.state = {
-            cities: cityData[provinceData[0]],
-            secondCity: cityData[provinceData[0]][0],
+            flags:true
         }
     }
-
-    handleProvinceChange = (value) => {
+    nextButton () {
         this.setState({
-            cities: cityData[value],
-            secondCity: cityData[value][0],
-        });
-    }
-
-    onSecondCityChange = (value) => {
-        this.setState({
-            secondCity: value,
-        });
-    }
-    validateSelect (rule, value, callback) {
-        const form = this.props.form;
-        if (value) {
-            form.validateFields(['confirm'], { force: true });
-        }
-        callback();
+            flags:!this.state.flags
+        })
     }
     render() {
-        const { getFieldDecorator } = this.props.form;
-        const formItemLayout = {
-            labelCol: { span: 6 },
-            wrapperCol: { span: 14 },
-        };
+        let content = null
+        if(this.state.flags) {
+            content = (
+                    <div>
+                        <img className="timeline" src={require('../../../font/timeline.png')} alt=""/>
+                        <div className="mainBox">
+                            <FillProduct/>
+                            <Button className="nextButton" onClick={this.nextButton} type="primary" htmlType="submit">下一步,输入商品规格</Button>
+                        </div>
+                    </div>
+                    )
+        } else {
+            content = (
+                <div>
+                    <img className="timeline" src={require('../../../font/timeline1.png')} alt=""/>
+                    <div className="mainBox">
+                        <Fillspecification/>
+                        <Button type="primary" htmlType="submit">上一步,填写商品信息</Button>
+                        <Button type="primary" htmlType="submit">下一步,提交至审核列表</Button>
+                    </div>
+                </div>
+            )
+        }
         return (
             <div>
-                <img className="timeline" src={require('../../../font/timeline.png')} alt=""/>
-                <div className="mainBox">
-                    <Form layout="inline" >
-                        <Form.Item
-                            {...formItemLayout}
-                            label="Select"
-                            hasFeedback
-                        >
-                            {getFieldDecorator('select', {
-                                rules: [
-                                    { required: true, message: 'Please select your country!' },
-                                ],
-                            })(
-                                <Select placeholder="Please select a country">
-                                    <Option value="china">China</Option>
-                                    <Option value="usa">U.S.A</Option>
-                                </Select>
-                            )}
-                        </Form.Item>
-                    </Form>
-                </div>
+                {content}
             </div>
+
         )
     }
-
 }
+
 export default addCommodity;

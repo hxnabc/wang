@@ -45,7 +45,8 @@ class SiderComponent extends React.Component{
         }
         return SubMenuNodes
     }
-   
+    handleClick(e){
+    }
     render() {
         const siderMenu = this.getMenu();
         return (
@@ -54,6 +55,9 @@ class SiderComponent extends React.Component{
                 <p>现金贷</p>
                 <Menu theme="dark"
                       onClick={this.props.handleActive}
+                      style={{ width: 256 }}
+                      defaultOpenKeys={['sub1']}
+                      onClick={this.handleClick}
                       style={{ textAlign: "left" }}
                       mode="inline">
                 {siderMenu}

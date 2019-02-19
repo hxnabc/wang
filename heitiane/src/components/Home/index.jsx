@@ -34,7 +34,7 @@ class Home extends React.Component {
       }
     
       handleActive=(activeTitle)=>{
-        console.log(activeTitle)//tab对应的侧边栏名称，可存储为数组
+        console.log(activeTitle, 1)//tab对应的侧边栏名称，可存储为数组
       }
 
     render() {
@@ -59,7 +59,7 @@ class Home extends React.Component {
                 </Tabs>   
 
                    
-                        {/* <AddCommodity/> */}
+                        <AddCommodity/>
 
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
