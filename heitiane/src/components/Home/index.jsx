@@ -59,7 +59,7 @@ class Home extends React.Component {
                 </Tabs>   
 
                    
-                        <AddCommodity/>
+                        {/* <AddCommodity/> */}
 
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
