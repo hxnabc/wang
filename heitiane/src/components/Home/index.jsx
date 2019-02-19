@@ -2,6 +2,7 @@ import React from 'react'
 import HeadBar from '../HeadBar'
 import SiderComponent from '../Sider'
 import AddCommodity from '../CommodityManagement/AddCommodity'
+
 import {
     Layout, Menu, Breadcrumb, Icon,Tabs
 } from 'antd';
@@ -11,13 +12,17 @@ const {
 } = Layout;
 const SubMenu = Menu.SubMenu;
 const TabPane = Tabs.TabPane;
-class Home extends React.Component {
 
-    state = {
+class Home extends React.Component {
+constructor(props){
+    super(props)
+    this.state = {
         collapsed: false,
         panes:[]
     };
-    newTabIndex = 0;
+    this.newTabIndex = 0;
+}
+   
 
    
 
@@ -34,10 +39,16 @@ class Home extends React.Component {
       }
     
       handleActive=(activeTitle)=>{
-        console.log(activeTitle, 1)//tab对应的侧边栏名称，可存储为数组
+          let panes=this.state.panes
+        panes.push({title:activeTitle.key})
+
+        this.setState({panes})
+        //tab对应的侧边栏名称，可存储为数组
       }
 
     render() {
+        const {panes}=this.state
+       
         return (
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider>
@@ -55,8 +66,8 @@ class Home extends React.Component {
                             type="editable-card"
                             onEdit={this.onEdit}
                         >
-            {this.state.panes.map(pane => <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>{pane.content}</TabPane>)}
-                </Tabs>   
+            {panes.map((pane,index) => <TabPane tab={pane.title} key={index} closable={pane.closable}>rfd</TabPane>)} 
+                </Tabs>  
 
                    
                         <AddCommodity/>

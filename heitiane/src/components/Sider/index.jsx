@@ -33,13 +33,13 @@ class SiderComponent extends React.Component{
                     return (<SubMenu key={item.menuId} title={<span>  <MyIcon  type="icon-yuandianzhong"/><span className="menu-text">{item.title}</span></span>}>
                         {
                             ( item.children.map((sun) => {
-                                return (<MenuItem key={sun.menuId} >{sun.title}</MenuItem>)
+                                return (<MenuItem key={sun.title} >{sun.title}</MenuItem>)
                             }))
 
                         }
                     </SubMenu>)
                 } else {
-                    return (<MenuItem key={item.menuId} ><MyIcon  type="icon-yuandianzhong"/>{item.title}</MenuItem>)
+                    return (<MenuItem key={item.title} ><MyIcon  type="icon-yuandianzhong"/>{item.title}</MenuItem>)
                 }
             })
         }
