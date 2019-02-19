@@ -11,7 +11,7 @@ class addCommodity extends React.Component{
             flags:true
         }
     }
-    nextButton () {
+    nextButton =()=> {
         this.setState({
             flags:!this.state.flags
         })
