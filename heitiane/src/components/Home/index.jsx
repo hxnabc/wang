@@ -1,6 +1,7 @@
 import React from 'react'
 import HeadBar from '../HeadBar'
 import SiderComponent from '../Sider'
+import AddCommodity from '../CommodityManagement/AddCommodity'
 import {
     Layout, Menu, Breadcrumb, Icon,Tabs
 } from 'antd';
@@ -12,16 +13,19 @@ const SubMenu = Menu.SubMenu;
 const TabPane = Tabs.TabPane;
 class Home extends React.Component {
 
-
     state = {
         collapsed: false,
         panes:[]
     };
     newTabIndex = 0;
+
+   
+
     onCollapse = (collapsed) => {
         console.log(collapsed);
         this.setState({ collapsed });
     }
+
     add = () => {
         const panes = this.state.panes;
         const activeKey = `newTab${this.newTabIndex++}`;
@@ -32,16 +36,18 @@ class Home extends React.Component {
       handleActive=(activeTitle)=>{
         console.log(activeTitle)//tab对应的侧边栏名称，可存储为数组
       }
+
     render() {
         return (
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider>
                     <SiderComponent handleActive={this.handleActive}/>
                 </Sider>
-                <Layout>
+                <Layout style={{background: '#fff'}}>
                     <Header style={{ background: '#fff', padding: 0 }} >
                         <HeadBar/>
                     </Header>
+
                     <Content style={{ margin: '0 16px' }}>
                         <Tabs
                             onChange={this.onChange}
@@ -51,13 +57,16 @@ class Home extends React.Component {
                         >
             {this.state.panes.map(pane => <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>{pane.content}</TabPane>)}
                 </Tabs>   
+
+                   
+                        <AddCommodity/>
+
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
                         Ant Design ©2018 Created by Ant UED
                     </Footer>
                 </Layout>
-            </Layout>
-        );
-    }
+            </Layout>)}
+    
 }
 export default Home;
