@@ -57,7 +57,7 @@ class SiderComponent extends React.Component{
                       onClick={this.props.handleActive}
                       style={{ width: 256 }}
                       defaultOpenKeys={['sub1']}
-                      onClick={this.handleClick}
+                    
                       style={{ textAlign: "left" }}
                       mode="inline">
                 {siderMenu}
