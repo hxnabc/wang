@@ -85,10 +85,10 @@ class SiderComponent extends React.Component{
                 <MyIcon className="logoIcon" type="icon-daikuan"/>
                 <p>现金贷</p>
                 <Menu theme="dark"
-                      onClick={this.handleClick}
+                      onClick={this.props.handleActive}
                       style={{ width: 256 }}
                       defaultOpenKeys={['sub1']}
-                      selectedKeys={[this.state.current]}
+                
                       mode="inline">
                 {siderMenu}
                 </Menu>
