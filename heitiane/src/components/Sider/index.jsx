@@ -20,7 +20,7 @@ class SiderComponent extends React.Component{
         http.post("/manage/backUser/checkLogin",{userPhone:15855496761})
             .then(res => {
             this.setState({
-                menuList:res.body.roleList
+                menuList:res.body.menuList
             })
         })
     }

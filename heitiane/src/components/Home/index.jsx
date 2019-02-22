@@ -2,6 +2,8 @@ import React from 'react'
 import HeadBar from '../HeadBar'
 import SiderComponent from '../Sider'
 import AddCommodity from '../CommodityManagement/AddCommodity'
+import ProductList from '../CommodityManagement/ProductList'
+import ClassifyManagement from '../CommodityManagement/ClassifyManagement'
 
 import {
     Layout, Menu, Breadcrumb, Icon,Tabs
@@ -54,23 +56,24 @@ constructor(props){
                 <Sider>
                     <SiderComponent handleActive={this.handleActive}/>
                 </Sider>
-                <Layout style={{background: '#fff'}}>
+                <Layout style={{background: '#F6FBFB'}}>
                     <Header style={{ background: '#fff', padding: 0 }} >
                         <HeadBar/>
                     </Header>
 
-                    <Content style={{ margin: '0 16px' }}>
+                    <Content style={{ margin: '0 16px'}}>
                         <Tabs
                             onChange={this.onChange}
                             activeKey={this.state.activeKey}
                             type="editable-card"
                             onEdit={this.onEdit}
+                            style={{background:"#fff"}}
                         >
             {panes.map((pane,index) => <TabPane tab={pane.title} key={index} closable={pane.closable}>rfd</TabPane>)} 
-                </Tabs>  
+                </Tabs>
 
-                   
-                        <AddCommodity/>
+
+                        <ClassifyManagement/>
 
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>

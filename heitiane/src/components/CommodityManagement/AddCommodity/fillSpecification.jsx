@@ -1,8 +1,8 @@
 import React from 'react'
 import './index.less'
-import {Select, Form, Input, Switch} from 'antd'
-const Option = Select.Option,FormItem = Form.Item
-class Fillspecification extends React.Component{
+import {Select, Form, Input, Upload, Button, Icon} from 'antd'
+const Option = Select.Option,FormItem = Form.Item, {TextArea} = Input
+class FillSpecification extends React.Component{
     render () {
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
@@ -10,150 +10,223 @@ class Fillspecification extends React.Component{
             wrapperCol: { span: 14},
         };
         return (
-            <Form layout="inline" >
+            <Form className="fill-specification" layout="inline" >
+                <h3>商品规格录入</h3>
                 <FormItem
                     {...formItemLayout}
-                    label="一级分类"
+                    label="规格名称"
                 >
-                    {getFieldDecorator('select', {
+                    {getFieldDecorator('input', {
                         rules: [
                             { required: true, message: 'Please select your country!' },
                         ],
                     })(
-                        <Select
-                            showSearch
-                            style={{ width: 259 }}
-                            placeholder="Select a person"
-                            optionFilterProp="children"
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                        >
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="tom">Tom</Option>
-                        </Select>,
+                       <Input style={{width:260}}/>
                     )}
                 </FormItem>
                 <FormItem
                     {...formItemLayout}
-                    label="二级分类"
+                    label="规格参数"
                 >
-                    {getFieldDecorator('select', {
+                    {getFieldDecorator('input', {
                         rules: [
                             { required: true, message: 'Please select your country!' },
                         ],
                     })(
-                        <Select
-                            showSearch
-                            style={{ width: 259 }}
-                            placeholder="Select a person"
-                            optionFilterProp="children"
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                        >
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="tom">Tom</Option>
-                        </Select>,
+                        <Input style={{width:260}}/>
                     )}
                 </FormItem>
                 <br/>
                 <FormItem
                     {...formItemLayout}
-                    label="商品名称"
-                    style={{margin: "30px 0 81px 0"}}
+                    label="规格名称"
                 >
-                    {getFieldDecorator('commodityName', {
-                        rules: [ {
-                            required: true, message: 'Please input your E-mail!',
-                        }],
+                    {getFieldDecorator('input', {
+                        rules: [
+                            { required: true, message: 'Please select your country!' },
+                        ],
                     })(
-                        <Input style={{width: 259}}/>
+                        <Input style={{width:260}}/>
+                    )}
+                </FormItem>
+                <FormItem
+                    {...formItemLayout}
+                    label="规格参数"
+                >
+                    {getFieldDecorator('input', {
+                        rules: [
+                            { required: true, message: 'Please select your country!' },
+                        ],
+                    })(
+                        <Input style={{width:260}}/>
                     )}
                 </FormItem>
                 <br/>
                 <FormItem
-                    {...{labelCol: { span:5},
-                        wrapperCol: { span: 19}}}
-                    label="商品划线价"
-                    style={{width: 680}}
-                    help="展示商品打折前价格，若商品未进行打折，则可以不填"
+                    {...formItemLayout}
+                    label="商品售价"
                 >
-                    <Input style={{width: 259}}/>
+                    {getFieldDecorator('input', {
+                        rules: [
+                            { required: true, message: 'Please select your country!' },
+                        ],
+                    })(
+                        <Input style={{width:260}}/>
+                    )}
+                </FormItem>
+                <br/>
+                <FormItem
+                    {...formItemLayout}
+                    className="Dragger"
+                >
+                    <div className="dropbox">
+                        {getFieldDecorator('dragger', {
+                            valuePropName: 'fileList',
+                            getValueFromEvent: this.normFile,
+                        })(
+                            <Upload.Dragger name="files" action="">
+                                <div className="operation">
+                                    <span>商品主图</span>
+                                    <span>删除图片</span>
+                                </div>
+                            </Upload.Dragger>
 
+                        )}
+                    </div>
+                </FormItem>
+                <FormItem
+                    {...formItemLayout}
+                    className="Dragger"
+                >
+                    <div className="dropbox">
+                        {getFieldDecorator('dragger', {
+                            valuePropName: 'fileList',
+                            getValueFromEvent: this.normFile,
+                        })(
+                            <Upload.Dragger name="files" action="">
+                                <div className="operation">
+                                    <span>设为主图</span>
+                                    <span>删除图片</span>
+                                </div>
+                            </Upload.Dragger>
+
+                        )}
+                    </div>
+                </FormItem>
+                <FormItem
+                    {...formItemLayout}
+                    className="Dragger"
+                >
+                    <div className="dropbox">
+                        {getFieldDecorator('dragger', {
+                            valuePropName: 'fileList',
+                            getValueFromEvent: this.normFile,
+                        })(
+                            <Upload.Dragger name="files" action="">
+                                <div className="operation">
+                                    <span>设为主图</span>
+                                    <span>删除图片</span>
+                                </div>
+                            </Upload.Dragger>
+
+                        )}
+                    </div>
+                </FormItem><FormItem
+                    {...formItemLayout}
+                    className="Dragger"
+                >
+                    <div className="dropbox">
+                        {getFieldDecorator('dragger', {
+                            valuePropName: 'fileList',
+                            getValueFromEvent: this.normFile,
+                        })(
+                            <Upload.Dragger name="files" action="">
+                                <div className="operation">
+                                    <span>设为主图</span>
+                                    <span>删除图片</span>
+                                </div>
+                            </Upload.Dragger>
+
+                        )}
+                    </div>
+                </FormItem>
+                <FormItem
+                    {...formItemLayout}
+                    className="Dragger"
+                >
+                    <div className="dropbox">
+                        {getFieldDecorator('dragger', {
+                            valuePropName: 'fileList',
+                            getValueFromEvent: this.normFile,
+                        })(
+                            <Upload.Dragger name="files" action="">
+                                <div className="operation">
+                                    <span>设为主图</span>
+                                    <span>删除图片</span>
+                                </div>
+                            </Upload.Dragger>
+
+                        )}
+                    </div>
                 </FormItem>
                 <br/>
                 <FormItem
                     {...formItemLayout}
-                    label="商品库存"
+                    className="upload"
                 >
-                    {getFieldDecorator('commodityName', {
-                        rules: [ {
-                            required: true, message: 'Please input your E-mail!',
-                        }],
+                    {getFieldDecorator('upload', {
+                        valuePropName: 'fileList',
+                        getValueFromEvent: this.normFile,
                     })(
-                        <Input style={{width: 259}}/>
+                        <Upload name="logo" action="/upload.do" listType="picture">
+                            <Button type="primary">
+                                <Icon type="upload" />上传图片
+                            </Button>
+                        </Upload>
+                    )}
+                </FormItem>
+                <br/>
+                <FormItem
+                    {...{labelCol: { span:6},
+                        wrapperCol: { span: 18}}}
+                    label="商品详情"
+                    className="textArea"
+                >
+                    {getFieldDecorator('input', {
+                        rules: [
+                            { required: true, message: 'Please select your country!' },
+                        ],
+                    })(
+                        <div className="dropbox">
+                            {getFieldDecorator('dragger', {
+                                valuePropName: 'fileList',
+                                getValueFromEvent: this.normFile,
+                            })(
+                                <Upload.Dragger name="files" action="">
+                                </Upload.Dragger>
+
+                            )}
+                        </div>
                     )}
                 </FormItem>
                 <br/>
                 <FormItem
                     {...formItemLayout}
-                    label="库存预警值"
-                    style={{margin: "37px 0 43px 0"}}
+                    className="upload"
                 >
-                    <Input style={{width: 259}}/>
-                </FormItem>
-                <br/>
-                <Form.Item
-                    {...formItemLayout}
-                    label="推荐商品"
-                    style={{width:340}}
-                >
-                    <Switch defaultChecked />
-                </Form.Item>
-                <br/>
-                <Form.Item
-                    {...formItemLayout}
-                    label="积分商品"
-                    style={{width:340}}
-                >
-                    <Switch defaultChecked/>
-                </Form.Item>
-                <br/>
-                <FormItem
-                    {...formItemLayout}
-                    style={{width: 340}}
-                    label="序号"
-                    help="不输入则按默认顺序排序"
-                >
-                    {getFieldDecorator('commodityName', {
-                        rules: [ {
-                            required: true, message: 'Please input your E-mail!',
-                        }],
+                    {getFieldDecorator('upload', {
+                        valuePropName: 'fileList',
+                        getValueFromEvent: this.normFile,
                     })(
-                        <Input style={{width: 259}}/>
-                    )}
-                </FormItem>
-                <br/>
-                <FormItem
-                    {...formItemLayout}
-                    label="详情页商品标题"
-                    style={{width: 340}}
-                >
-                    {getFieldDecorator('commodityName', {
-                        rules: [ {
-                            required: true, message: 'Please input your E-mail!',
-                        }],
-                    })(
-                        <Input style={{width: 259}}/>
+                        <Upload name="logo" action="/fileUpload/goodsImg" listType="picture">
+                            <Button type="primary">
+                                <Icon type="upload" />上传图片
+                            </Button>
+                        </Upload>
                     )}
                 </FormItem>
             </Form>
         )
     }
 }
-export default Form.create()(Fillspecification);
+export default Form.create()(FillSpecification);

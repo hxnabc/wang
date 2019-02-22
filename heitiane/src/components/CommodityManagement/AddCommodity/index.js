@@ -1,3 +1,5 @@
+//添加商品
+
 import React from 'react'
 import http from '../../../util/http'
 import './index.less'
@@ -8,7 +10,7 @@ class addCommodity extends React.Component{
     constructor (props) {
         super(props)
         this.state = {
-            flags:true
+            flags:false
         }
     }
     nextButton =()=> {
@@ -31,11 +33,13 @@ class addCommodity extends React.Component{
         } else {
             content = (
                 <div>
-                    <img className="timeline" src={require('../../../font/timeline1.png')} alt=""/>
+                    <img className="timeline1" src={require('../../../font/timeline1.png')} alt=""/>
                     <div className="mainBox">
                         <Fillspecification/>
-                        <Button type="primary" htmlType="submit">上一步,填写商品信息</Button>
-                        <Button type="primary" htmlType="submit">下一步,提交至审核列表</Button>
+                        <div className="sunbmitButton">
+                            <Button type="normal" htmlType="submit">上一步,填写商品信息</Button>
+                            <Button type="primary" htmlType="submit">下一步,提交至审核列表</Button>
+                        </div>
                     </div>
                 </div>
             )
