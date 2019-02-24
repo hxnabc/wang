@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
+
 import './App.css';
 import Home from './components/Home'
-
+import Login from './login'
+import './util/utils.js';
 class App extends Component {
+
+
   render() {
+      console.log(this.props.Cookies)
     return (
       <div className="App">
-          <Home/>
+          <Login></Login>
       </div>
     );
   }

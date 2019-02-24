@@ -1,9 +1,10 @@
 import React from 'react'
 import HeadBar from '../HeadBar'
 import SiderComponent from '../Sider'
-import AddCommodity from '../CommodityManagement/AddCommodity'
-import ProductList from '../CommodityManagement/ProductList'
+//import AddCommodity from '../CommodityManagement/AddCommodity'
+//import ProductList from '../CommodityManagement/ProductList'
 import ClassifyManagement from '../CommodityManagement/ClassifyManagement'
+import route1 from '../CommodityManagement/route1.js'
 
 import {
     Layout, Menu, Breadcrumb, Icon,Tabs
@@ -41,39 +42,60 @@ constructor(props){
       }
     
       handleActive=(activeTitle)=>{
-          let panes=this.state.panes
-        panes.push({title:activeTitle.key})
 
-        this.setState({panes})
-        //tab对应的侧边栏名称，可存储为数组
+          let panes=this.state.panes
+          let obj = {};
+        panes.push({title:activeTitle.key,id:activeTitle.item.props.tabid})
+
+
+
+          let newPanes = panes.reduce((cur,next) => {
+              if(  !obj[next.id]){
+                  obj[next.id] = true && cur.push(next);
+              }
+              return cur;
+          },[])
+
+        this.setState({panes:newPanes},()=>{
+            this.setState({ activeKey:activeTitle.item.props.tabid });
+        })
+
+
       }
+    onChange = (activeKey) => {
+        this.setState({ activeKey });
+    }
 
     render() {
         const {panes}=this.state
-       
         return (
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider>
                     <SiderComponent handleActive={this.handleActive}/>
                 </Sider>
                 <Layout style={{background: '#F6FBFB'}}>
-                    <Header style={{ background: '#fff', padding: 0 }} >
+                    <Header style={{ background: '#fff', padding: 0,height:'54px','lineHeight:':'54px'}} >
                         <HeadBar/>
                     </Header>
 
-                    <Content style={{ margin: '0 16px'}}>
+                    <Content style={{ margin: '0'}}>
                         <Tabs
                             onChange={this.onChange}
                             activeKey={this.state.activeKey}
                             type="editable-card"
                             onEdit={this.onEdit}
                             style={{background:"#fff"}}
+                            className='tab-style'
                         >
-            {panes.map((pane,index) => <TabPane tab={pane.title} key={index} closable={pane.closable}>rfd</TabPane>)} 
+            {panes.map((pane,index) => {
+            // .ant-tabs-nav-container
+                let id=pane.id
+
+                return<TabPane     onChange={this.onChange} tab={pane.title} key={id} closable={pane.closable}   >{route1[id]}</TabPane>})}
                 </Tabs>
 
 
-                        <ClassifyManagement/>
+                        {/*<ClassifyManagement/>*/}
 
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>

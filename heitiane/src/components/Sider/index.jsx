@@ -30,16 +30,16 @@ class SiderComponent extends React.Component{
         if (this.state.menuList.length) {
             SubMenuNodes = this.state.menuList.map((item) => {
                 if(item.children.length){
-                    return (<SubMenu key={item.menuId} title={<span>  <MyIcon  type="icon-yuandianzhong"/><span className="menu-text">{item.title}</span></span>}>
+                    return (<SubMenu key={item.title}   tabid={item.menuId} title={<span>  <MyIcon  type="icon-yuandianzhong"/><span className="menu-text">{item.title}</span></span>}>
                         {
                             ( item.children.map((sun) => {
-                                return (<MenuItem key={sun.title} >{sun.title}</MenuItem>)
+                                return (<MenuItem key={sun.title} tabid={sun.menuId}>{sun.title}</MenuItem>)
                             }))
 
                         }
                     </SubMenu>)
                 } else {
-                    return (<MenuItem key={item.title} ><MyIcon  type="icon-yuandianzhong"/>{item.title}</MenuItem>)
+                    return (<MenuItem key={item.title} tabid={item.menuId}><MyIcon  type="icon-yuandianzhong"/>{item.title}</MenuItem>)
                 }
             })
         }
